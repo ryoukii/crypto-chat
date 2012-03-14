@@ -1,3 +1,4 @@
+package it.cryptochat.module;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class NoCryptoModule extends CryptoModule {
 			output.writeUTF(message);
 		} catch (IOException e) {
 			logger.error("Problems during message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -25,7 +26,7 @@ public class NoCryptoModule extends CryptoModule {
 			return input.readUTF();
 		} catch (IOException e) {
 			logger.error("Problems during message receiving: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return null;

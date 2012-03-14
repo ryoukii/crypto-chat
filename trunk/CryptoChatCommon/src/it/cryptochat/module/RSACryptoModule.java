@@ -1,3 +1,4 @@
+package it.cryptochat.module;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -75,16 +76,16 @@ public class RSACryptoModule extends CryptoModule {
 			
 		} catch (IllegalBlockSizeException e) {
 			logger.error("Problems in message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (BadPaddingException e) {
 			logger.error("Problems in message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (InvalidKeyException e) {
 			logger.error("Problems in message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
 			logger.error("Problems in message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 	}
@@ -104,16 +105,16 @@ public class RSACryptoModule extends CryptoModule {
 			
 		} catch (IllegalBlockSizeException e) {
 			logger.error("Problems in message reading: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (BadPaddingException e) {
 			logger.error("Problems in message reading: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (InvalidKeyException e) {
 			logger.error("Problems in message reading: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
 			logger.error("Problems in message reading: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return plainString;

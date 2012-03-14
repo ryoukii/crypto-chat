@@ -1,3 +1,4 @@
+package it.cryptochat.common;
 
 public class Message {
 	
