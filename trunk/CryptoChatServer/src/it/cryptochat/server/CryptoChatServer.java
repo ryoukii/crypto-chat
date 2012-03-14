@@ -1,3 +1,6 @@
+package it.cryptochat.server;
+import it.cryptochat.module.CryptoModule;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,11 +21,11 @@ public class CryptoChatServer extends Thread implements Observer {
 	private DataInputStream input = null;
 	private DataOutputStream output = null;
 	private Dashboard dashboard;
-	private CryptoModule criptoModule;
+	private CryptoModule cryptoModule;
 	
-	public CryptoChatServer(Socket clientSocket, Dashboard dashboard, CryptoModule criptoModule) {
+	public CryptoChatServer(Socket clientSocket, Dashboard dashboard, CryptoModule cryptoModule) {
 		
-		this.criptoModule = criptoModule;
+		this.cryptoModule = cryptoModule;
 		
 		if(clientSocket != null) {
 			this.clientSocket = clientSocket;
@@ -32,11 +35,11 @@ public class CryptoChatServer extends Thread implements Observer {
 				input = new DataInputStream(clientSocket.getInputStream());
 				output = new DataOutputStream(clientSocket.getOutputStream());
 				
-				this.setName(input.readUTF());
+//				this.setName(input.readUTF());
 				
 			} catch (IOException e) {
 				logger.error("Problems during streams opening: " + e);
-//			e.printStackTrace();
+				e.printStackTrace();
 			}
 			
 		}
@@ -58,18 +61,17 @@ public class CryptoChatServer extends Thread implements Observer {
 		
 		String buffer;
 		
+		cryptoModule.init(clientSocket);
+		
 		while(!stop) {
-			buffer = criptoModule.read(input);
+			buffer = cryptoModule.read(input);
 			dashboard.append(buffer);
-//				send(buffer);
 			
 			if(buffer.equals(STOP_STRING)) {
 				logger.debug("Stop command received");
 				stop = true;
 				break;
 			}
-			
-			logger.debug("Message received: " + buffer);
 		}
 		
 		try {
@@ -77,12 +79,13 @@ public class CryptoChatServer extends Thread implements Observer {
 			logger.debug("Client socket closed");
 		} catch (IOException e) {
 			logger.error("Problems dunring socket closing " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	
 	private void send(String message) throws IOException {
-		output.writeUTF(message);
+//		output.writeUTF(message);
+		cryptoModule.send(output, message);
 	}
 
 	@Override
@@ -93,7 +96,7 @@ public class CryptoChatServer extends Thread implements Observer {
 			logger.debug("Message sent to " + this.getName() + ": " + message);
 		} catch (IOException e) {
 			logger.error("Problems during message sending: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 	

@@ -1,3 +1,6 @@
+package it.cryptochat.server;
+import it.cryptochat.module.CryptoModuleFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +22,7 @@ public class CryptoChatMain {
 		
 		// Server 
 		
-		CryptoChatMainServer mainServer = new CryptoChatMainServer(serverPort, CryptoModuleFactory.ModuleType.RSA);
+		CryptoChatMainServer mainServer = new CryptoChatMainServer(serverPort, CryptoModuleFactory.ModuleType.DH_DES);
 		mainServer.start();
 		
 		

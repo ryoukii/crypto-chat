@@ -1,3 +1,7 @@
+package it.cryptochat.server;
+import it.cryptochat.module.CryptoModule;
+import it.cryptochat.module.CryptoModuleFactory;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,7 +21,7 @@ public class CryptoChatMainServer extends Thread {
 	private int port;
 	private ServerSocket serverSocket = null;
 	private Dashboard dashboard;
-	private CryptoModule criptoModule;
+	private CryptoModule cryptoModule;
 	
 	
 	public CryptoChatMainServer(CryptoModuleFactory.ModuleType criptoMode) {
@@ -30,7 +34,7 @@ public class CryptoChatMainServer extends Thread {
 
 		dashboard = Dashboard.getInstance(); 
 		
-		criptoModule = CryptoModuleFactory.getCriptoModule(criptoMode);
+		cryptoModule = CryptoModuleFactory.getCriptoModule(criptoMode);
 		
 		if(port >= 1024 && port <= 65535)
 			this.port = port;
@@ -43,14 +47,14 @@ public class CryptoChatMainServer extends Thread {
 		
 		try {
 //			serverSocket = new ServerSocket(this.port);
-			serverSocket = criptoModule.createServerSocket(this.port);
+			serverSocket = cryptoModule.createServerSocket(this.port);
 			serverSocket.setReuseAddress(true);
 		} catch (IOException e) {
 			logger.error("Prolems during server socket creation: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		} catch (Exception e) {
 			logger.error("Prolems during server socket creation: " + e);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		logger.debug("Server socket created");
@@ -68,12 +72,11 @@ public class CryptoChatMainServer extends Thread {
 				
 				logger.debug("Connection accepted");
 				
-				// TODO launch server with clientSocket
-				new CryptoChatServer(clientSocket, dashboard, criptoModule).start();
+				new CryptoChatServer(clientSocket, dashboard, cryptoModule).start();
 				
 			} catch (IOException e) {
 				logger.error("Problems in server thread: " + e);
-	//			e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}

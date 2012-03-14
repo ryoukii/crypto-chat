@@ -1,3 +1,6 @@
+package it.cryptochat.server;
+import it.cryptochat.common.Message;
+
 import java.util.Observable;
 
 import org.apache.log4j.Logger;
@@ -22,6 +25,7 @@ public class Dashboard extends Observable {
 		this.message.setMessage(message);
 		setChanged();
 		notifyObservers();
+		logger.debug("Message appended to dashboard: " + message);
 	}
 	
 	public static Dashboard getInstance() {
