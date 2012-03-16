@@ -56,7 +56,7 @@ public class CryptoChatMain {
 			}
 
 		} catch (IOException e) {
-			logger.debug("Problems loading properties");
+			logger.error("Problems loading properties");
 			e.printStackTrace();
 		}
 		
