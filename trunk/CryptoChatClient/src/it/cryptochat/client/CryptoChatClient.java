@@ -46,7 +46,7 @@ public class CryptoChatClient {
 			try {
 				this.serverAddress = InetAddress.getByName(serverAddress);
 			} catch (UnknownHostException e) {
-				logger.debug("Error in server address: " + e);
+				logger.error("Error in server address: " + e);
 				e.printStackTrace();
 			}
 		}
@@ -71,14 +71,14 @@ public class CryptoChatClient {
 			send(new Message(clientName, "Hello"));
 			
 		} catch (UnknownHostException e) {
-			logger.debug("Problems during socket creation: " + e);
+			logger.error("Problems during socket creation: " + e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			logger.debug("Problems during socket creation: " + e);
+			logger.error("Problems during socket creation: " + e);
 			e.printStackTrace();
 		}
 		catch (Exception e) {
-			logger.debug("Problems during socket creation: " + e);
+			logger.error("Problems during socket creation: " + e);
 			e.printStackTrace();
 		}
 	}
