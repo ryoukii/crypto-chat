@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.PrintStream;
 
 import org.apache.log4j.Logger;
 
@@ -17,13 +18,23 @@ public class CryptoChatClientReceiver extends Thread {
 
 	private CryptoModule cryptoModule;
 	private ObjectInputStream input;
+	private PrintStream ps;
 	
 	public CryptoChatClientReceiver(ObjectInputStream input, CryptoModule cryptoModule) {
+		this(input, cryptoModule, System.out);
+	}
+	
+	public CryptoChatClientReceiver(ObjectInputStream input, CryptoModule cryptoModule, PrintStream ps) {
 		if(input != null)
 			this.input = input;
 		 
 		if(cryptoModule != null)
 			this.cryptoModule = cryptoModule;
+		
+		if(ps != null)
+			this.ps = ps;
+		else
+			ps = System.out;
 		
 		logger.debug("Client receiver created");
 	}
@@ -31,18 +42,29 @@ public class CryptoChatClientReceiver extends Thread {
 	@Override
 	public void run() {
 		
+		Boolean stop = false;
 		Message message;
 		
-		while((message = read()) != null) {
-			System.out.println(message);
+		try {
+			message = read();
+			while(message != null && !stop) {
+				ps.println(message);
+				message = read();
+			}
+		} catch (IOException e) {
+			stop = true;
+			logger.error("Problems during message reading: " + e);
+			e.printStackTrace();
 		}
+		
+		logger.debug("ClientReceiver terminated");
 	}
 	
 //	public String read() {
 //		return cryptoModule.read(input);
 //	}
 	
-	public Message read() {
+	public Message read() throws IOException {
 		return cryptoModule.read(input);
 	}
 }

@@ -41,11 +41,13 @@ public class CryptoChatMain {
 		CryptoModuleFactory.ModuleType moduleType = CryptoModuleFactory.ModuleType.valueOf(System.getProperty("CryptoMode"));
 		
 		if(args.length == 1) {
-			client = new CryptoChatClient(args[0], serverPort, serverAddress, moduleType);
+			client = new CryptoChatClient(args[0], moduleType);
 		}
 		else {
-			client = new CryptoChatClient(serverPort, serverAddress, moduleType);
+			client = new CryptoChatClient(moduleType);
 		}
+		
+		client.connect(serverPort, serverAddress);
 		
 		try {
 			System.out.print("Messaggio: ");
@@ -89,8 +91,8 @@ public class CryptoChatMain {
 			e.printStackTrace();
 		}
 		
-		logger.debug("Properties used:");
-		logger.debug("CryptoMode = " + System.getProperty("CryptoMode"));
+		logger.info("Properties used:");
+		logger.info("CryptoMode = " + System.getProperty("CryptoMode"));
 
 	}
 

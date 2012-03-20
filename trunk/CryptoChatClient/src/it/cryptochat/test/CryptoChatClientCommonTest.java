@@ -16,7 +16,8 @@ public class CryptoChatClientCommonTest {
 	
 	@BeforeClass
 	protected void SetUpClient() {
-		CryptoChatClient client = new CryptoChatClient(SERVER_PORT, SERVER_ADDR, MODULE_TYPE);
+		CryptoChatClient client = new CryptoChatClient(MODULE_TYPE);
+		client.connect(SERVER_PORT, SERVER_ADDR);
 	}
 	
 	@AfterClass
