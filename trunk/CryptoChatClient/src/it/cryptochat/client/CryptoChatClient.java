@@ -3,22 +3,18 @@ package it.cryptochat.client;
 import it.cryptochat.common.*;
 import it.cryptochat.module.CryptoModule;
 import it.cryptochat.module.CryptoModuleFactory;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import org.apache.log4j.Logger;
 
 
-public class CryptoChatClient {
+public class CryptoChatClient implements ICryptoChatClient {
 
-	private static final int SOCKET_TIMEOUT = 30000;
+//	private static final int SOCKET_TIMEOUT = 30000;
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 	
@@ -27,8 +23,6 @@ public class CryptoChatClient {
 	private ObjectOutputStream output = null;
 	private String clientName;
 	private CryptoModule cryptoModule;
-	private InetAddress serverAddress;
-	private int serverPort;
 	private PrintStream ps;
 	
 //	public CryptoChatClient(int serverPort, String serverAddress, CryptoModuleFactory.ModuleType criptoMode) {
@@ -170,7 +164,7 @@ public class CryptoChatClient {
 		}
 	}
 	
-	public boolean isConnectet() {
+	public boolean isConnected() {
 		if(socket == null)
 			return false;
 		

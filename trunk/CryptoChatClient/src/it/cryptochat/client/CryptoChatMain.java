@@ -2,11 +2,7 @@ package it.cryptochat.client;
 
 import it.cryptochat.common.Message;
 import it.cryptochat.module.CryptoModuleFactory;
-import it.cryptochat.module.CryptoModuleFactory.ModuleType;
-
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

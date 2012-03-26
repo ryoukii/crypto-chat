@@ -132,7 +132,7 @@ public class CryptoChatClientUI extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 //				showInfoMessage("Closing");
-				if(client != null && client.isConnectet())
+				if(client != null && client.isConnected())
 					client.close();
 			}
 		});
@@ -172,7 +172,7 @@ public class CryptoChatClientUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
         	String message = messageTF.getText();
 			if(!message.equals("")) {
-				if(client.isConnectet()) {
+				if(client.isConnected()) {
 					client.send(new Message(client.getClientName(), message));
 					board.appendToBoard("You: " + message + "\n");
 				}

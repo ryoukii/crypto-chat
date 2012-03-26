@@ -6,6 +6,13 @@ import javax.swing.SwingUtilities;
 import org.apache.log4j.WriterAppender;
 import org.apache.log4j.spi.LoggingEvent;
 
+/**
+ * 
+ * @author Stefano
+ * 
+ * Questa classe modella un appender per log4j che consente di
+ * visualizzare i messaggi del logger su una JTextArea di swing
+ */
 public class TextAreaAppender extends WriterAppender {
 
 	static private JTextArea jTextArea = null;

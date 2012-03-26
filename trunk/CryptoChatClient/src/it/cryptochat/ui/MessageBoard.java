@@ -3,6 +3,13 @@ package it.cryptochat.ui;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
+/**
+ * 
+ * @author Stefano
+ * 
+ * Questa classe modella l'area in cui vengono visualizzati i
+ * messaggi inviati e ricevuti
+ */
 public class MessageBoard implements IMessageBoard {
 	
 	private JTextArea boardTA;

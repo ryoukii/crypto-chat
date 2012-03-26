@@ -1,8 +1,16 @@
 package it.cryptochat.ui;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * 
+ * @author Stefano
+ *
+ * Questa classe modella un PrintStream che consente di stampare
+ * i messaggi su una MessageBoard
+ */
 public class MessageBoardStream extends PrintStream {
 
 	private IMessageBoard messageBoard;
@@ -36,6 +44,12 @@ public class MessageBoardStream extends PrintStream {
 	@Override
 	public void println(String x) {
 		print(x + "\n");
+	}
+	
+	@Override
+	public void println(Object x) {
+		String s = String.valueOf(x);
+		print(s + "\n");
 	}
 	
 }

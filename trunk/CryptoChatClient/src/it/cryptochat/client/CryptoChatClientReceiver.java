@@ -1,14 +1,10 @@
 package it.cryptochat.client;
 
-import it.cryptochat.common.Message;
+import it.cryptochat.common.IMessage;
 import it.cryptochat.module.CryptoModule;
-
-import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.PrintStream;
-
 import org.apache.log4j.Logger;
 
 
@@ -43,7 +39,7 @@ public class CryptoChatClientReceiver extends Thread {
 	public void run() {
 		
 		Boolean stop = false;
-		Message message;
+		IMessage message;
 		
 		try {
 			message = read();
@@ -64,7 +60,7 @@ public class CryptoChatClientReceiver extends Thread {
 //		return cryptoModule.read(input);
 //	}
 	
-	public Message read() throws IOException {
+	public IMessage read() throws IOException {
 		return cryptoModule.read(input);
 	}
 }
