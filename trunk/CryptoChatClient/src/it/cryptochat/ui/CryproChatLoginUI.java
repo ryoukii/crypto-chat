@@ -76,6 +76,7 @@ public class CryproChatLoginUI extends JDialog {
 		model.addElement("SSL");
 		model.addElement("DH_3DES");
 		model.addElement("RSA");
+		model.addElement("INTEGRITY");
 		cbCyptoMode = new JComboBox<String>(model);
 		cs.gridx = 1;
 		cs.gridy = 1;
