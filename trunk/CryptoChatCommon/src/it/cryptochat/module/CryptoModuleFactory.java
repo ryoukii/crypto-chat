@@ -2,7 +2,7 @@ package it.cryptochat.module;
 
 public class CryptoModuleFactory {
 	
-	public enum ModuleType { NO_CRYPTO, SSL, RSA, DH_3DES };
+	public enum ModuleType { NO_CRYPTO, SSL, RSA, DH_3DES, INTEGRITY };
 	
 	public static CryptoModule getCryptoModule(ModuleType type) {
 		switch(type) {
@@ -18,6 +18,9 @@ public class CryptoModuleFactory {
 			
 			case DH_3DES:
 				return new DH_3DESCryptoModule();
+			
+			case INTEGRITY:
+				return new IntegrityCryptoModule();
 				
 			default:
 				return null;
