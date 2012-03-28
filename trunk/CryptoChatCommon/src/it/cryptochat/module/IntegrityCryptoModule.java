@@ -25,6 +25,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.Cipher;
+import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
 
 public class IntegrityCryptoModule extends CryptoModule {
@@ -113,7 +114,7 @@ public class IntegrityCryptoModule extends CryptoModule {
 	public void send(ObjectOutputStream output, Message message) {
 		
 		try {
-			
+			Mac mac = Mac.getInstance("MAC", "BC");
 			Signature signingEngine = Signature.getInstance("SHA256withRSA", "BC");
 			SignedObject signedObj = new SignedObject(message, myPrivateKey, signingEngine);
 			
