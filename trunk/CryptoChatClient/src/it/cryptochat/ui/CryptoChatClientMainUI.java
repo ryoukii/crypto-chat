@@ -1,5 +1,7 @@
 package it.cryptochat.ui;
 
+import it.cryptochat.utils.CryptoChatUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -35,12 +37,6 @@ public class CryptoChatClientMainUI {
 
 	public void initProperties() {
 
-		Properties props = new Properties();
-
-		try {
-
-//			FileInputStream fis = new FileInputStream("./cryptochat.properties");
-//			InputStream is = this.getClass().getResourceAsStream("/cryptochat.properties");
 			InputStream is = this.getClass().getClassLoader().getResourceAsStream("cryptochat.properties");
 			if(is == null) {
 				logger.debug("Properties file not found. Creating default properties.");
@@ -48,24 +44,8 @@ public class CryptoChatClientMainUI {
 				System.setProperty("LoggerUI", "false");
 			}
 			else {
-				logger.debug("Properties file found. Loading properties.");
-				props.load(is);
-				
-				String propString = props.getProperty("CryptoMode", "NO_CRYPTO");
-				System.setProperty("CryptoMode", propString);
-				
-				propString = props.getProperty("LoggerUI", "false");
-				System.setProperty("LoggerUI", propString);
+				CryptoChatUtils.loadPropertiesFromStream(is);
 			}
-
-		} catch (IOException e) {
-			logger.error("Problems loading properties");
-			e.printStackTrace();
-		}
-		
-		logger.info("Properties used:");
-		logger.info("LoggerUI = " + System.getProperty("LoggerUI"));
-		logger.info("CryptoMode = " + System.getProperty("CryptoMode"));
 
 	}
 }

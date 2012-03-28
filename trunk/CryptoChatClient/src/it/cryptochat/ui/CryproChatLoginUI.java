@@ -1,5 +1,8 @@
 package it.cryptochat.ui;
 
+import it.cryptochat.module.CryptoModuleFactory;
+import it.cryptochat.module.CryptoModuleFactory.ModuleType;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Frame;
@@ -72,11 +75,13 @@ public class CryproChatLoginUI extends JDialog {
 		panel.add(lbCryptoMode, cs);
 
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-		model.addElement("NO_CRYPTO");
-		model.addElement("SSL");
-		model.addElement("DH_3DES");
-		model.addElement("RSA");
-		model.addElement("INTEGRITY");
+		for(ModuleType moduleType : CryptoModuleFactory.ModuleType.values())
+			model.addElement(moduleType.name());
+//		model.addElement("NO_CRYPTO");
+//		model.addElement("SSL");
+//		model.addElement("DH_3DES");
+//		model.addElement("RSA");
+//		model.addElement("INTEGRITY");
 		cbCyptoMode = new JComboBox<String>(model);
 		cs.gridx = 1;
 		cs.gridy = 1;
