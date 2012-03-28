@@ -66,7 +66,9 @@ public class RSACryptoModule extends CryptoModule {
 			output.writeInt(myPublicKeyBytes.length);
 
 			// Send the public key bytes to the other peer
-			logger.debug("Writing my public key: length = " + myPublicKeyBytes.length + " byte");
+			int lengthByte = myPublicKeyBytes.length;
+			int lengthBit = lengthByte * 8;
+			logger.debug("Writing my public key: length = " + lengthByte + " byte (" + lengthBit + " bit)");
 			output.write(myPublicKeyBytes);
 
 			// Retrieve the public key length in bytes of the other peer
@@ -74,7 +76,7 @@ public class RSACryptoModule extends CryptoModule {
 			byte[] peerPublicKeyBytes = new byte[keyLength];
 
 			// Retrieve the public key bytes of the other peer
-			logger.debug("Reading peer public key: length = " + keyLength + " byte");
+			logger.debug("Reading peer public key: length = " + keyLength + " byte (" + (keyLength*8) + " bit)");
 			input.readFully(peerPublicKeyBytes);
 
 			// Convert the public key bytes into a PublicKey object
