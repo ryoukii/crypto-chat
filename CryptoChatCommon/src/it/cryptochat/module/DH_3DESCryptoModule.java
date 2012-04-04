@@ -116,7 +116,9 @@ public class DH_3DESCryptoModule extends CryptoModule {
 //			logger.debug("Shared key generated: length = " + secretKey.length);
 
 			secretKey = ka.generateSecret("DESede");
-			logger.debug("Shared key length: " + secretKey.getEncoded().length + " byte");
+			int keyLengthByte = secretKey.getEncoded().length;
+			int keyLengthBit = keyLengthByte * 8;
+			logger.debug("Shared key length: " + keyLengthByte + " byte (" + keyLengthBit + " bit)");
 
 			cipherSend = Cipher.getInstance("DESede", "BC");
 			cipherSend.init(Cipher.ENCRYPT_MODE, secretKey);
