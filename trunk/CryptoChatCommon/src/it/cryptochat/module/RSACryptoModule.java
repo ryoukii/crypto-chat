@@ -97,8 +97,10 @@ public class RSACryptoModule extends CryptoModule {
 //			cipherSend.init(Cipher.ENCRYPT_MODE, secretKey);
 //			cipherRead.init(Cipher.DECRYPT_MODE, secretKey);
 			
-			cipherSend = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
-			cipherRead = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
+			cipherSend = Cipher.getInstance("RSA/NONE/PKCS1Padding", "BC");
+			cipherRead = Cipher.getInstance("RSA/NONE/PKCS1Padding", "BC");
+//			cipherSend = Cipher.getInstance("RSA/NONE/OAEPWithSHA512AndMGF1Padding", "BC");
+//			cipherRead = Cipher.getInstance("RSA/NONE/OAEPWithSHA512AndMGF1Padding", "BC");
 			
 			cipherSend.init(Cipher.ENCRYPT_MODE, peerPublicKey);
 			cipherRead.init(Cipher.DECRYPT_MODE, myPrivateKey);
